@@ -20,11 +20,19 @@ const articles: Record<string, { category: string; title: string; excerpt: strin
 
 const fallback = { category: 'Simply Anthem', title: 'An editorial from Simply Anthem', excerpt: 'A story for the curious.', author: 'Anthem Desk', date: 'Sep 2026', read: '5 min read', image: 'https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=1600&q=85', body: ['This story is being prepared for the Simply Anthem journal.', 'Return to the blog for the latest stories, reporting, and Southern Nevada economic and real estate conditions.'] }
 
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
+  const article = articles[slug] ?? fallback
+  return { title: article.title, description: article.excerpt, alternates: { canonical: `/stories/${slug}` }, openGraph: { type: 'article', title: article.title, description: article.excerpt, url: `/stories/${slug}`, images: [{ url: article.image }] } }
+}
+
 export default async function StoryPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
   const article = articles[slug] ?? fallback
 
-  return <main className="story-page min-h-screen bg-background text-foreground">
+  const articleSchema = { '@context': 'https://schema.org', '@type': 'Article', headline: article.title, description: article.excerpt, image: [article.image], author: { '@type': 'Organization', name: article.author }, publisher: { '@type': 'Organization', name: 'Simply Anthem', url: 'https://simplyanthem.com' }, datePublished: article.date, mainEntityOfPage: `https://simplyanthem.com/stories/${slug}` }
+
+  return <main className="story-page min-h-screen bg-background text-foreground"><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
     <header className="story-header mx-auto flex max-w-7xl items-center justify-between px-5 py-5 lg:px-10"><Link className="wordmark" href="/">simply<span>anthem</span></Link><Link className="back-link" href="/"><ArrowLeft aria-hidden="true" /> Back to journal</Link></header>
     <article className="article-detail mx-auto max-w-7xl px-5 pb-24 lg:px-10">
       <div className="article-kicker"><span>{article.category}</span><span>{article.date}</span></div>

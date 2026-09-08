@@ -2,10 +2,31 @@ import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
 import './globals.css'
 
+const siteUrl = 'https://simplyanthem.com'
+
 export const metadata: Metadata = {
-  title: 'Simply Anthem — Stories for the curious',
-  description: 'A journal about music, culture, and the people making the world feel a little more alive.',
-  generator: 'v0.app',
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: 'Simply Anthem | Southern Nevada Economy & Real Estate',
+    template: '%s | Simply Anthem',
+  },
+  description: 'Independent reporting and practical analysis on Southern Nevada economic conditions, Las Vegas Valley real estate, housing, jobs, and culture.',
+  applicationName: 'Simply Anthem',
+  alternates: { canonical: '/' },
+  keywords: ['Southern Nevada economy', 'Las Vegas real estate', 'Nevada housing market', 'Las Vegas economy', 'Clark County housing'],
+  authors: [{ name: 'Simply Anthem' }],
+  creator: 'Simply Anthem',
+  publisher: 'Simply Anthem',
+  robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 } },
+  openGraph: {
+    type: 'website',
+    url: siteUrl,
+    siteName: 'Simply Anthem',
+    title: 'Simply Anthem | Southern Nevada Economy & Real Estate',
+    description: 'Reporting and analysis on Southern Nevada economic conditions, housing, jobs, real estate, and culture.',
+    locale: 'en_US',
+  },
+  twitter: { card: 'summary_large_image', title: 'Simply Anthem | Southern Nevada Economy & Real Estate', description: 'Reporting and analysis on Southern Nevada economic conditions, housing, jobs, real estate, and culture.' },
 }
 
 export const viewport: Viewport = {

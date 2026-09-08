@@ -135,6 +135,12 @@ export default function Page() {
   const [email, setEmail] = useState('')
   const [subscribed, setSubscribed] = useState(false)
 
+  const faq = [
+    ['What does Simply Anthem cover?', 'Simply Anthem covers Southern Nevada economic conditions, Las Vegas Valley real estate, housing affordability, jobs, population, investment, and culture.'],
+    ['What is the current Southern Nevada housing outlook?', 'The report snapshot describes a more balanced market with elevated prices, roughly four months of resale inventory, and more room for buyers to compare and negotiate.'],
+    ['How often is the Southern Nevada report updated?', 'The editorial data brief is designed to be refreshed frequently as new economic and real estate indicators become available.'],
+  ]
+
   const filteredStories = useMemo(
     () => activeCategory === 'All stories' ? stories : stories.filter((story) => story.category === activeCategory),
     [activeCategory],
@@ -145,8 +151,11 @@ export default function Page() {
     if (email.trim()) setSubscribed(true)
   }
 
+  const faqSchema = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map(([question, answer]) => ({ '@type': 'Question', name: question, acceptedAnswer: { '@type': 'Answer', text: answer } })) }
+
   return (
     <main className="min-h-screen bg-background text-foreground">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <div className="announcement">Stories for the curious <span>•</span> New essays every week</div>
       <header className="site-header">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-5 lg:px-10">
@@ -214,6 +223,8 @@ export default function Page() {
           </article>)}
         </div>
       </section>
+
+      <section className="faq-section mx-auto max-w-7xl px-5 lg:px-10" aria-labelledby="faq-title"><div className="faq-heading"><p className="eyebrow">Quick answers</p><h2 id="faq-title">Southern Nevada,<br /><em>in plain language.</em></h2></div><div className="faq-list">{faq.map(([question, answer]) => <details key={question}><summary>{question}</summary><p>{answer}</p></details>)}</div></section>
 
       <section id="newsletter" className="newsletter mx-auto max-w-7xl px-5 lg:px-10"><div className="newsletter-inner">
         <div><p className="eyebrow">The Sunday signal</p><h2>A little something<br /><em>worth opening.</em></h2></div>
