@@ -5,6 +5,40 @@ import { ArrowUpRight, Camera, Menu, Search, X } from 'lucide-react'
 
 const categories = ['All stories', 'Southern Nevada', 'Real estate', 'Economy', 'Music', 'Culture', 'Conversations', 'Field notes']
 
+// Keep the report metrics in one place so the editorial brief is easy to refresh.
+const reportData = {
+  lastUpdated: 'September 2026',
+  metrics: [
+    { value: '953%', label: 'Projected data center capacity growth by 2030' },
+    { value: '40.8M', label: 'Annual Clark County visitors' },
+    { value: '$479K', label: 'Southern Nevada trailing 12-month median sale price' },
+    { value: '#1', label: 'Las Vegas MSA ranking for business expansion' },
+  ],
+  population: [
+    ['20.5%', 'Move for family'],
+    ['39.1%', 'Incoming residents age 65+'],
+    ['19.9%', 'Relocate for jobs'],
+  ],
+  trades: [
+    ['Electricians', '9.5%', 'Data center, residential, and commercial buildout'],
+    ['HVAC technicians', '8.1%', 'New construction and aging housing stock'],
+    ['Plumbers', '4.5%', 'Residential expansion and hospitality upgrades'],
+    ['Carpenters', '4.5%', 'Residential and commercial construction'],
+  ],
+  housing: [
+    ['$479K', 'Median sale price; 24 consecutive months of growth'],
+    ['28,102', 'Trailing 12-month resale closings'],
+    ['4 months', 'Estimated resale inventory'],
+    ['5%–6%', 'Mortgage-rate range highlighted in the report'],
+  ],
+  signals: [
+    ['71%', 'U.S. employers struggling to find skilled talent'],
+    ['$110K', 'Actual Southern Nevada household income'],
+    ['$125,323', 'Income needed to live comfortably'],
+    ['5.2%', 'Unemployment rate cited in the report'],
+  ],
+}
+
 const stories = [
   {
     category: 'Music',
@@ -138,6 +172,18 @@ export default function Page() {
           <div><p className="eyebrow">Southern Nevada brief · September 2026</p><h2 id="market-brief-title">A steadier market,<br /><em>still under pressure.</em></h2></div>
           <div className="market-brief-copy"><p>Home prices remain near record highs while a four-month supply of listings is giving buyers more room to negotiate. The region continues to add jobs, but 5.4% unemployment, slower wage growth, inflation, and mortgage rates near 6.7% are keeping affordability in focus.</p><p className="source-note">A Simply Anthem editorial snapshot of current economic and real estate conditions.</p></div>
         </div>
+
+        <section className="report-dashboard" aria-labelledby="report-dashboard-title">
+          <div className="report-heading"><div><p className="eyebrow">Nevada 2026 economic playbook</p><h2 id="report-dashboard-title">The numbers<br /><em>behind the noise.</em></h2></div><p>Based on the latest Simply Anthem report: 100+ signals across population, jobs, housing, visitors, and investment. This brief is designed to be refreshed as new data arrives.</p></div>
+          <div className="report-metrics">{reportData.metrics.map((metric) => <div className="report-metric" key={metric.label}><strong>{metric.value}</strong><span>{metric.label}</span></div>)}</div>
+          <div className="report-columns">
+            <div><p className="eyebrow">Population pull</p><div className="report-list">{reportData.population.map(([value, label]) => <div key={label}><strong>{value}</strong><span>{label}</span></div>)}</div></div>
+            <div><p className="eyebrow">Skilled trades outlook</p><div className="report-table">{reportData.trades.map(([trade, growth, implication]) => <div className="report-table-row" key={trade}><strong>{trade}</strong><span>{growth}</span><small>{implication}</small></div>)}</div></div>
+          </div>
+          <div className="report-housing"><div><p className="eyebrow">Southern Nevada housing snapshot</p><p className="report-note">Prices remain elevated while inventory and rate movement are creating a more nuanced market for buyers, sellers, and investors.</p></div><div className="housing-grid">{reportData.housing.map(([value, label]) => <div key={label}><strong>{value}</strong><span>{label}</span></div>)}</div></div>
+          <div className="report-signals"><p className="eyebrow">Pressure points to watch</p><div className="housing-grid">{reportData.signals.map(([value, label]) => <div key={label}><strong>{value}</strong><span>{label}</span></div>)}</div></div>
+          <p className="source-note report-source">Source: The Spaulding Team · Nevada 2026 Economic Trends Report · Last updated {reportData.lastUpdated} · Refresh the reportData object in this file when new metrics are available.</p>
+        </section>
 
         <article className="featured-story">
           <div className="featured-image-wrap"><img src={stories[0].image} alt="Musician performing under warm stage lights" className="featured-image" /></div>
