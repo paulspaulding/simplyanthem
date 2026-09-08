@@ -3,7 +3,7 @@
 import { useMemo, useState } from 'react'
 import { ArrowUpRight, Camera, Menu, Search, X } from 'lucide-react'
 
-const categories = ['All stories', 'Music', 'Culture', 'Conversations', 'Field notes']
+const categories = ['All stories', 'Southern Nevada', 'Real estate', 'Economy', 'Music', 'Culture', 'Conversations', 'Field notes']
 
 const stories = [
   {
@@ -15,6 +15,33 @@ const stories = [
     read: '7 min read',
     image: 'https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?auto=format&fit=crop&w=1200&q=85',
     featured: true,
+  },
+  {
+    category: 'Southern Nevada',
+    title: 'A market finding its balance',
+    excerpt: 'What stable prices, more inventory, and a little negotiating room mean for Southern Nevada buyers and sellers.',
+    author: 'Anthem Desk',
+    date: 'Sep 08, 2026',
+    read: '9 min read',
+    image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=900&q=85',
+  },
+  {
+    category: 'Economy',
+    title: 'The jobs story behind the valley outlook',
+    excerpt: 'Southern Nevada keeps adding jobs, even as higher costs and slower wage growth reshape household decisions.',
+    author: 'Anthem Desk',
+    date: 'Sep 03, 2026',
+    read: '6 min read',
+    image: 'https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=900&q=85',
+  },
+  {
+    category: 'Real estate',
+    title: 'What four months of supply changes',
+    excerpt: 'Inventory is giving buyers more leverage across the Las Vegas Valley, without making affordability simple.',
+    author: 'Anthem Desk',
+    date: 'Aug 29, 2026',
+    read: '7 min read',
+    image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=85',
   },
   {
     category: 'Conversations',
@@ -101,12 +128,17 @@ export default function Page() {
         <div className="hero-copy">
           <p className="eyebrow">The Simply Anthem Journal</p>
           <h1>For the ones<br /><em>making</em> noise.</h1>
-          <p className="hero-intro">A journal about music, culture, and the people making the world feel a little more alive.</p>
+          <p className="hero-intro">A journal about music, culture, and the people shaping Southern Nevada&apos;s economy, neighborhoods, and everyday life.</p>
         </div>
         <div className="hero-mark" aria-hidden="true"><span>SA</span><small>Vol. 01<br />Est. 2024</small></div>
       </section>
 
       <section id="stories" className="mx-auto max-w-7xl px-5 pb-24 lg:px-10">
+        <div className="market-brief" aria-labelledby="market-brief-title">
+          <div><p className="eyebrow">Southern Nevada brief · September 2026</p><h2 id="market-brief-title">A steadier market,<br /><em>still under pressure.</em></h2></div>
+          <div className="market-brief-copy"><p>Home prices remain near record highs while a four-month supply of listings is giving buyers more room to negotiate. The region continues to add jobs, but 5.4% unemployment, slower wage growth, inflation, and mortgage rates near 6.7% are keeping affordability in focus.</p><p className="source-note">A Simply Anthem editorial snapshot of current economic and real estate conditions.</p></div>
+        </div>
+
         <article className="featured-story">
           <div className="featured-image-wrap"><img src={stories[0].image} alt="Musician performing under warm stage lights" className="featured-image" /></div>
           <div className="featured-content">
