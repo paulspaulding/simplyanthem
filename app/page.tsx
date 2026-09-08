@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import { useMemo, useState } from 'react'
 import { ArrowUpRight, Camera, Menu, Search, X } from 'lucide-react'
 
@@ -48,6 +49,7 @@ const stories = [
     date: 'Sep 04, 2024',
     read: '7 min read',
     image: 'https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?auto=format&fit=crop&w=1200&q=85',
+    slug: 'the-beautiful-mess-of-making-something-from-nothing',
     featured: true,
   },
   {
@@ -58,6 +60,7 @@ const stories = [
     date: 'Sep 08, 2026',
     read: '9 min read',
     image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=900&q=85',
+    slug: 'a-market-finding-its-balance',
   },
   {
     category: 'Economy',
@@ -67,6 +70,7 @@ const stories = [
     date: 'Sep 03, 2026',
     read: '6 min read',
     image: 'https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=900&q=85',
+    slug: 'the-jobs-story-behind-the-valley-outlook',
   },
   {
     category: 'Real estate',
@@ -76,6 +80,7 @@ const stories = [
     date: 'Aug 29, 2026',
     read: '7 min read',
     image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=85',
+    slug: 'what-four-months-of-supply-changes',
   },
   {
     category: 'Conversations',
@@ -191,7 +196,7 @@ export default function Page() {
             <div className="story-meta"><span>{stories[0].category}</span><span>{stories[0].date}</span></div>
             <h2>{stories[0].title}</h2>
             <p>{stories[0].excerpt}</p>
-            <a className="text-link" href="#read">Read story <ArrowUpRight aria-hidden="true" /></a>
+            <Link className="text-link" href={`/stories/${stories[0].slug}`}>Read story <ArrowUpRight aria-hidden="true" /></Link>
           </div>
         </article>
 
@@ -201,9 +206,9 @@ export default function Page() {
 
         <div className="story-grid">
           {filteredStories.slice(1).map((story) => <article className="story-card" key={story.title}>
-            <a href="#read" className="story-image-wrap"><img src={story.image} alt="" className="story-image" /></a>
+            <Link href={`/stories/${story.slug ?? story.title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`} className="story-image-wrap"><img src={story.image} alt="" className="story-image" /></Link>
             <div className="story-meta"><span>{story.category}</span><span>{story.date}</span></div>
-            <h3><a href="#read">{story.title}</a></h3>
+            <h3><Link href={`/stories/${story.slug ?? story.title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`}>{story.title}</Link></h3>
             <p>{story.excerpt}</p>
             <div className="story-footer"><span>{story.author}</span><span>{story.read}</span></div>
           </article>)}

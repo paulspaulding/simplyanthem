@@ -123,6 +123,17 @@ em { font-family: 'Playfair Display', serif; font-weight: 500; }
 .instagram-link { align-items: center; display: flex; gap: 7px; justify-self: end; }
 .instagram-link svg { height: 14px; width: 14px; }
 .site-footer small { justify-self: end; }
+.story-header { border-bottom: 1px solid var(--border); }
+.back-link, .article-return { align-items: center; color: var(--muted-foreground); display: inline-flex; font: 11px 'DM Mono', monospace; gap: 8px; text-transform: uppercase; }
+.back-link svg, .article-return svg { height: 15px; width: 15px; }
+.article-detail { padding-top: 84px; }
+.article-kicker, .article-byline { color: var(--muted-foreground); display: flex; font: 11px 'DM Mono', monospace; gap: 22px; letter-spacing: .04em; text-transform: uppercase; }
+.article-detail h1 { font-size: clamp(54px, 9vw, 132px); font-weight: 500; letter-spacing: -.085em; line-height: .87; margin: 28px 0 24px; max-width: 1000px; }
+.article-dek { font-size: clamp(19px, 2vw, 28px); line-height: 1.35; margin: 0 0 28px; max-width: 700px; }
+.article-hero { display: block; height: min(62vw, 700px); margin-top: 58px; object-fit: cover; width: 100%; }
+.article-body { margin: 72px auto; max-width: 680px; }
+.article-body p { font-size: 20px; line-height: 1.65; margin: 0 0 28px; }
+.article-return { border-top: 1px solid var(--border); color: var(--foreground); display: flex; justify-content: space-between; padding-top: 20px; width: 100%; }
 
 @media (max-width: 767px) {
   .announcement { font-size: 9px; }
@@ -163,6 +174,14 @@ em { font-family: 'Playfair Display', serif; font-weight: 500; }
   .newsletter { padding-bottom: 68px; }
   .newsletter-inner { display: block; padding: 42px 25px 48px; }
   .newsletter h2 { font-size: 49px; margin-bottom: 50px; }
+  .story-header { padding-bottom: 2px; }
+  .back-link { font-size: 9px; }
+  .article-detail { padding-top: 54px; }
+  .article-detail h1 { font-size: clamp(50px, 15vw, 76px); margin-top: 22px; }
+  .article-dek { font-size: 18px; }
+  .article-hero { height: 75vw; margin-top: 40px; }
+  .article-body { margin: 46px auto; }
+  .article-body p { font-size: 18px; }
   .site-footer { align-items: start; display: flex; flex-direction: column; gap: 22px; padding-bottom: 28px; padding-top: 28px; }
   .instagram-link, .site-footer small { justify-self: auto; }
 }
