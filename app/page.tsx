@@ -228,7 +228,7 @@ export default function Page() {
 
       <section id="newsletter" className="newsletter mx-auto max-w-7xl px-5 lg:px-10"><div className="newsletter-inner">
         <div><p className="eyebrow">The Sunday signal</p><h2>A little something<br /><em>worth opening.</em></h2></div>
-        <div className="newsletter-form-wrap">{subscribed ? <p className="success-message">You&apos;re on the list. See you Sunday.</p> : <form onSubmit={handleSubscribe}><label htmlFor="email">A weekly note for your inbox.</label><div className="form-row"><input id="email" type="email" required placeholder="Your email address" value={email} onChange={(event) => setEmail(event.target.value)} /><button type="submit">Sign me up <ArrowUpRight aria-hidden="true" /></button></div></form>}</div>
+        <div className="newsletter-form-wrap">{subscribed ? <p className="success-message">You&apos;re on the list. See you Sunday.</p> : <form onSubmit={handleSubscribe} suppressHydrationWarning><label htmlFor="email">A weekly note for your inbox.</label><div className="form-row" suppressHydrationWarning><input id="email" name="newsletter-email" type="email" autoComplete="off" data-lpignore="true" data-1p-ignore="true" required placeholder="Your email address" value={email} onChange={(event) => setEmail(event.target.value)} /><button type="submit">Sign me up <ArrowUpRight aria-hidden="true" /></button></div></form>}</div>
       </div></section>
 
       <footer id="about" className="site-footer mx-auto max-w-7xl px-5 py-8 lg:px-10"><a className="wordmark" href="#top">simply<span>anthem</span></a><p>Independent stories for a louder, kinder world.</p><a className="instagram-link" href="#instagram"><Camera aria-hidden="true" /> Instagram</a><small>© 2024 Simply Anthem</small></footer>
