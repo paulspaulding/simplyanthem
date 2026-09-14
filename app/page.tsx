@@ -204,6 +204,7 @@ export default function Page() {
 
         <section className="report-dashboard" aria-labelledby="report-dashboard-title">
           <div className="report-heading"><div><p className="eyebrow">Nevada 2026 economic playbook</p><h2 id="report-dashboard-title">The numbers<br /><em>behind the noise.</em></h2></div><p>Based on the latest Simply Anthem report: 100+ signals across population, jobs, housing, visitors, and investment. This brief is designed to be refreshed as new data arrives.</p></div>
+          <div className="report-actions"><div><strong>August 2026 Housing Market Report</strong><span>Las Vegas REALTORS® · Southern Nevada</span></div><div className="report-action-links"><Link className="text-link" href="/stories/august-2026-housing-market-update">Read the analysis <ArrowUpRight aria-hidden="true" /></Link><a className="text-link" href="/august-2026-housing-market-update.pdf" target="_blank" rel="noreferrer">Open full PDF <ArrowUpRight aria-hidden="true" /></a></div></div>
           <div className="report-metrics">{reportData.metrics.map((metric) => <div className="report-metric" key={metric.label}><strong>{metric.value}</strong><span>{metric.label}</span></div>)}</div>
           <div className="report-columns">
             <div><p className="eyebrow">Population pull</p><div className="report-list">{reportData.population.map(([value, label]) => <div key={label}><strong>{value}</strong><span>{label}</span></div>)}</div></div>
