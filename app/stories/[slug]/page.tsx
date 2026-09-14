@@ -2,6 +2,10 @@ import Link from 'next/link'
 import { ArrowLeft, ArrowUpRight } from 'lucide-react'
 
 const articles: Record<string, { category: string; title: string; excerpt: string; author: string; date: string; read: string; image: string; body: string[] }> = {
+  'august-2026-housing-market-update': {
+    category: 'Real estate', title: 'August housing report: more inventory, slower closings', excerpt: 'The latest Las Vegas REALTORS report shows 4.2 months of single-family availability, a $475,000 median closing price, and a softer pace of sales across Southern Nevada.', author: 'Simply Anthem Desk', date: 'August 2026', read: '8 min read', image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1600&q=85',
+    body: ['The August 2026 Las Vegas REALTORS® Monthly Housing Market Update points to a Southern Nevada market with more available homes and a slower pace of closings. Single-family units sold totaled 1,803, down 1.7% from August 2025, while new listings reached 3,238, up 1.4% year over year.', 'The single-family median closing price was $475,000, down 1.0% from the prior year. Availability excluding offers stood at 7,590 units, up 5.3% year over year, producing 4.2 effective months of availability. That is up 7.2% from August 2025 and 15.7% from July.', 'The condo and townhouse segment shows a different price point and more supply: 449 units sold at a $299,900 median closing price, with 2,714 units available excluding offers and 6.0 effective months of availability. Condo and townhouse availability was up 14.5% year over year.', 'These figures describe MLS activity from Las Vegas REALTORS® and cover its reporting territory. They do not include every new home, for-sale-by-owner listing, or non-MLS property. Read the full August 2026 report for methodology and definitions.'],
+  },
   'a-market-finding-its-balance': {
     category: 'Southern Nevada',
     title: 'A market finding its balance',
@@ -39,7 +43,7 @@ export default async function StoryPage({ params }: { params: Promise<{ slug: st
       <h1>{article.title}</h1><p className="article-dek">{article.excerpt}</p>
       <div className="article-byline"><span>By {article.author}</span><span>{article.read}</span></div>
       <img className="article-hero" src={article.image} alt="" />
-      <div className="article-body">{article.body.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}</div>
+      <div className="article-body">{article.body.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}{slug === 'august-2026-housing-market-update' && <p><a className="text-link" href="/august-2026-housing-market-update.pdf" target="_blank" rel="noreferrer">Read the full Las Vegas REALTORS® report <ArrowUpRight aria-hidden="true" /></a></p>}</div>
       <Link className="article-return" href="/"><ArrowLeft aria-hidden="true" /> Return to all stories <ArrowUpRight aria-hidden="true" /></Link>
     </article>
   </main>
