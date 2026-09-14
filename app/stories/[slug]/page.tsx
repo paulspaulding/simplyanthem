@@ -34,7 +34,7 @@ export default async function StoryPage({ params }: { params: Promise<{ slug: st
   const { slug } = await params
   const article = articles[slug] ?? fallback
 
-  const articleSchema = { '@context': 'https://schema.org', '@type': 'Article', headline: article.title, description: article.excerpt, image: [article.image], author: { '@type': 'Organization', name: article.author }, publisher: { '@type': 'Organization', name: 'Simply Anthem', url: 'https://simplyanthem.com' }, datePublished: article.date, mainEntityOfPage: `https://simplyanthem.com/stories/${slug}` }
+  const articleSchema = { '@context': 'https://schema.org', '@type': 'NewsArticle', headline: article.title, description: article.excerpt, image: [article.image], author: { '@type': 'Organization', name: article.author }, publisher: { '@type': 'Organization', name: 'Simply Anthem', url: 'https://simplyanthem.com' }, datePublished: article.date, dateModified: article.date, articleSection: article.category, inLanguage: 'en-US', mainEntityOfPage: { '@type': 'WebPage', '@id': `https://simplyanthem.com/stories/${slug}` } }
 
   return <main className="story-page min-h-screen bg-background text-foreground"><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
     <header className="story-header mx-auto flex max-w-7xl items-center justify-between px-5 py-5 lg:px-10"><Link className="wordmark" href="/">simply<span>anthem</span></Link><Link className="back-link" href="/"><ArrowLeft aria-hidden="true" /> Back to journal</Link></header>
@@ -42,7 +42,7 @@ export default async function StoryPage({ params }: { params: Promise<{ slug: st
       <div className="article-kicker"><span>{article.category}</span><span>{article.date}</span></div>
       <h1>{article.title}</h1><p className="article-dek">{article.excerpt}</p>
       <div className="article-byline"><span>By {article.author}</span><span>{article.read}</span></div>
-      <img className="article-hero" src={article.image} alt="" />
+      <img className="article-hero" src={article.image} alt={`${article.title} — Simply Anthem`} />
       <div className="article-body">{article.body.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}{slug === 'august-2026-housing-market-update' && <p><a className="text-link" href="/august-2026-housing-market-update.pdf" target="_blank" rel="noreferrer">Read the full Las Vegas REALTORS® report <ArrowUpRight aria-hidden="true" /></a></p>}</div>
       <Link className="article-return" href="/"><ArrowLeft aria-hidden="true" /> Return to all stories <ArrowUpRight aria-hidden="true" /></Link>
     </article>
