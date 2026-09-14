@@ -40,6 +40,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en" className="bg-background">
       <body className="antialiased">
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({ '@context': 'https://schema.org', '@type': 'WebSite', name: 'Simply Anthem', url: siteUrl, description: 'Independent reporting and practical analysis on Southern Nevada economic conditions, Las Vegas Valley real estate, housing, jobs, and culture.', publisher: { '@type': 'Organization', name: 'Simply Anthem', url: siteUrl } }) }} />
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>

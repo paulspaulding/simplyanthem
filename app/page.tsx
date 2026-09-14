@@ -1,14 +1,14 @@
 'use client'
 
 import Link from 'next/link'
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { ArrowUpRight, Camera, Menu, Search, X } from 'lucide-react'
 
 const categories = ['All stories', 'Southern Nevada', 'Real estate', 'Economy', 'Music', 'Culture', 'Conversations', 'Field notes']
 
 // Keep the report metrics in one place so the editorial brief is easy to refresh.
 const reportData = {
-  lastUpdated: 'September 2026',
+  lastUpdated: 'August 2026 housing report',
   metrics: [
     { value: '953%', label: 'Projected data center capacity growth by 2030' },
     { value: '40.8M', label: 'Annual Clark County visitors' },
@@ -27,10 +27,10 @@ const reportData = {
     ['Carpenters', '4.5%', 'Residential and commercial construction'],
   ],
   housing: [
-    ['$479K', 'Median sale price; 24 consecutive months of growth'],
-    ['28,102', 'Trailing 12-month resale closings'],
-    ['4 months', 'Estimated resale inventory'],
-    ['5%–6%', 'Mortgage-rate range highlighted in the report'],
+    ['$475K', 'Single-family median closing price; down 1.0% year over year'],
+    ['1,803', 'Single-family units sold in August; down 1.7% year over year'],
+    ['4.2 months', 'Single-family effective availability; up 7.2% year over year'],
+    ['6.0 months', 'Condo/townhouse effective availability; up 14.5% year over year'],
   ],
   signals: [
     ['71%', 'U.S. employers struggling to find skilled talent'],
@@ -51,6 +51,16 @@ const stories = [
     image: 'https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?auto=format&fit=crop&w=1200&q=85',
     slug: 'the-beautiful-mess-of-making-something-from-nothing',
     featured: true,
+  },
+  {
+    category: 'Real estate',
+    title: 'August housing report: more inventory, slower closings',
+    excerpt: 'The latest Las Vegas REALTORS report shows 4.2 months of single-family availability, a $475,000 median closing price, and a softer pace of sales across Southern Nevada.',
+    author: 'Simply Anthem Desk',
+    date: 'August 2026',
+    read: '8 min read',
+    image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=900&q=85',
+    slug: 'august-2026-housing-market-update',
   },
   {
     category: 'Southern Nevada',
@@ -134,6 +144,11 @@ export default function Page() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [email, setEmail] = useState('')
   const [subscribed, setSubscribed] = useState(false)
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   const faq = [
     ['What does Simply Anthem cover?', 'Simply Anthem covers Southern Nevada economic conditions, Las Vegas Valley real estate, housing affordability, jobs, population, investment, and culture.'],
@@ -196,7 +211,7 @@ export default function Page() {
           </div>
           <div className="report-housing"><div><p className="eyebrow">Southern Nevada housing snapshot</p><p className="report-note">Prices remain elevated while inventory and rate movement are creating a more nuanced market for buyers, sellers, and investors.</p></div><div className="housing-grid">{reportData.housing.map(([value, label]) => <div key={label}><strong>{value}</strong><span>{label}</span></div>)}</div></div>
           <div className="report-signals"><p className="eyebrow">Pressure points to watch</p><div className="housing-grid">{reportData.signals.map(([value, label]) => <div key={label}><strong>{value}</strong><span>{label}</span></div>)}</div></div>
-          <p className="source-note report-source">Source: The Spaulding Team · Nevada 2026 Economic Trends Report · Last updated {reportData.lastUpdated} · Refresh the reportData object in this file when new metrics are available.</p>
+          <p className="source-note report-source">Source: Las Vegas REALTORS® August 2026 Monthly Housing Market Update · Last updated {reportData.lastUpdated} · <a href="/august-2026-housing-market-update.pdf" target="_blank" rel="noreferrer">View the full report</a> · Refresh the reportData object in this file when new metrics are available.</p>
         </section>
 
         <article className="featured-story">
@@ -228,7 +243,7 @@ export default function Page() {
 
       <section id="newsletter" className="newsletter mx-auto max-w-7xl px-5 lg:px-10"><div className="newsletter-inner">
         <div><p className="eyebrow">The Sunday signal</p><h2>A little something<br /><em>worth opening.</em></h2></div>
-        <div className="newsletter-form-wrap">{subscribed ? <p className="success-message">You&apos;re on the list. See you Sunday.</p> : <form onSubmit={handleSubscribe}><label htmlFor="email">A weekly note for your inbox.</label><div className="form-row"><input id="email" type="email" required placeholder="Your email address" value={email} onChange={(event) => setEmail(event.target.value)} /><button type="submit">Sign me up <ArrowUpRight aria-hidden="true" /></button></div></form>}</div>
+        <div className="newsletter-form-wrap">{mounted && (subscribed ? <p className="success-message">You&apos;re on the list. See you Sunday.</p> : <form onSubmit={handleSubscribe}><label htmlFor="email">A weekly note for your inbox.</label><div className="form-row"><input id="email" name="newsletter-email" type="email" autoComplete="off" data-lpignore="true" data-1p-ignore="true" required placeholder="Your email address" value={email} onChange={(event) => setEmail(event.target.value)} /><button type="submit">Sign me up <ArrowUpRight aria-hidden="true" /></button></div></form>)}</div>
       </div></section>
 
       <footer id="about" className="site-footer mx-auto max-w-7xl px-5 py-8 lg:px-10"><a className="wordmark" href="#top">simply<span>anthem</span></a><p>Independent stories for a louder, kinder world.</p><a className="instagram-link" href="#instagram"><Camera aria-hidden="true" /> Instagram</a><small>© 2024 Simply Anthem</small></footer>
