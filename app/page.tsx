@@ -57,7 +57,7 @@ const stories = [
     title: 'August 2026 Las Vegas Housing Market Update: Charts, Trends & What It Means For You',
     excerpt: 'Market conditions continue to favor informed buyers and sellers in Southern Nevada. Here is what August 2026 data says about prices, inventory, buyer leverage, and the path ahead.',
     author: 'The Spaulding Team',
-    date: 'September 2026',
+    date: 'Sep 14, 2026',
     read: '8–10 min read',
     image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=900&q=85',
     slug: 'august-2026-housing-market-update',
@@ -156,9 +156,14 @@ export default function Page() {
     ['How often is the Southern Nevada report updated?', 'The editorial data brief is designed to be refreshed frequently as new economic and real estate indicators become available.'],
   ]
 
+  const orderedStories = useMemo(
+    () => [...stories].sort((a, b) => Date.parse(b.date) - Date.parse(a.date)),
+    [],
+  )
+
   const filteredStories = useMemo(
-    () => activeCategory === 'All stories' ? stories : stories.filter((story) => story.category === activeCategory),
-    [activeCategory],
+    () => activeCategory === 'All stories' ? orderedStories : orderedStories.filter((story) => story.category === activeCategory),
+    [activeCategory, orderedStories],
   )
 
   function handleSubscribe(event: React.FormEvent<HTMLFormElement>) {
@@ -216,12 +221,12 @@ export default function Page() {
         </section>
 
         <article className="featured-story">
-          <div className="featured-image-wrap"><img src={stories[0].image} alt="Musician performing under warm stage lights" className="featured-image" /></div>
+          <div className="featured-image-wrap"><img src={orderedStories[0].image} alt="Musician performing under warm stage lights" className="featured-image" /></div>
           <div className="featured-content">
-            <div className="story-meta"><span>{stories[0].category}</span><span>{stories[0].date}</span></div>
-            <h2>{stories[0].title}</h2>
-            <p>{stories[0].excerpt}</p>
-            <Link className="text-link" href={`/stories/${stories[0].slug}`}>Read story <ArrowUpRight aria-hidden="true" /></Link>
+            <div className="story-meta"><span>{orderedStories[0].category}</span><span>{orderedStories[0].date}</span></div>
+            <h2>{orderedStories[0].title}</h2>
+            <p>{orderedStories[0].excerpt}</p>
+            <Link className="text-link" href={`/stories/${orderedStories[0].slug}`}>Read story <ArrowUpRight aria-hidden="true" /></Link>
           </div>
         </article>
 
@@ -230,7 +235,7 @@ export default function Page() {
         </div></div>
 
         <div className="story-grid">
-          {filteredStories.slice(1).map((story) => <article className="story-card" key={story.title}>
+          {filteredStories.filter((story) => activeCategory !== 'All stories' || story.slug !== orderedStories[0].slug).map((story) => <article className="story-card" key={story.title}>
             <Link href={`/stories/${story.slug ?? story.title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`} className="story-image-wrap"><img src={story.image} alt="" className="story-image" /></Link>
             <div className="story-meta"><span>{story.category}</span><span>{story.date}</span></div>
             <h3><Link href={`/stories/${story.slug ?? story.title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`}>{story.title}</Link></h3>
