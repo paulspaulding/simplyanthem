@@ -42,6 +42,17 @@ const reportData = {
 
 const stories = [
   {
+    category: 'Market Updates',
+    title: 'August 2026 Market Report: What Southern Nevada Buyers Need to Know',
+    excerpt: 'The newest Simply Anthem housing report breaks down prices, inventory, supply, sales velocity, and what the balanced market means for buyers, sellers, and investors.',
+    author: 'The Spaulding Team',
+    date: 'Sep 15, 2026',
+    read: '10 min read',
+    image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=900&q=85',
+    slug: 'august-2026-market-report',
+    featured: true,
+  },
+  {
     category: 'Music',
     title: 'The beautiful mess of making something from nothing',
     excerpt: 'Inside the rooms, rituals, and restless ideas shaping the next wave of independent sound.',

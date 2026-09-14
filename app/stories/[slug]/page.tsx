@@ -22,6 +22,14 @@ const articles: Record<string, { category: string; title: string; excerpt: strin
   },
 }
 
+articles['august-2026-market-report'] = {
+  ...articles['august-2026-housing-market-update'],
+  title: 'August 2026 Market Report: What Southern Nevada Buyers Need to Know',
+  excerpt: 'The newest Simply Anthem housing report breaks down prices, inventory, supply, sales velocity, and what the balanced market means for buyers, sellers, and investors.',
+  date: 'Sep 15, 2026',
+  read: '10 min read',
+}
+
 const fallback = { category: 'Simply Anthem', title: 'An editorial from Simply Anthem', excerpt: 'A story for the curious.', author: 'Anthem Desk', date: 'Sep 2026', read: '5 min read', image: 'https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=1600&q=85', body: ['This story is being prepared for the Simply Anthem journal.', 'Return to the blog for the latest stories, reporting, and Southern Nevada economic and real estate conditions.'] }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
@@ -43,7 +51,7 @@ export default async function StoryPage({ params }: { params: Promise<{ slug: st
       <h1>{article.title}</h1><p className="article-dek">{article.excerpt}</p>
       <div className="article-byline"><span>By {article.author}</span><span>{article.read}</span></div>
       <img className="article-hero" src={article.image} alt={`${article.title} — Simply Anthem`} />
-      <div className="article-body">{article.body.map((paragraph, index) => { const isHeading = slug === 'august-2026-housing-market-update' && [1, 5, 9, 13].includes(index); return isHeading ? <h2 key={paragraph}>{paragraph}</h2> : <p key={paragraph}>{paragraph}</p> })}{slug === 'august-2026-housing-market-update' && <p><a className="text-link" href="/august-2026-housing-market-update.pdf" target="_blank" rel="noreferrer">Read the full Las Vegas REALTORS® report <ArrowUpRight aria-hidden="true" /></a></p>}</div>
+      <div className="article-body">{article.body.map((paragraph, index) => { const isHeading = (slug === 'august-2026-housing-market-update' || slug === 'august-2026-market-report') && [1, 5, 9, 13].includes(index); return isHeading ? <h2 key={paragraph}>{paragraph}</h2> : <p key={paragraph}>{paragraph}</p> })}{(slug === 'august-2026-housing-market-update' || slug === 'august-2026-market-report') && <p><a className="text-link" href="/august-2026-housing-market-update.pdf" target="_blank" rel="noreferrer">Read the full Las Vegas REALTORS® report <ArrowUpRight aria-hidden="true" /></a></p>}</div>
       <Link className="article-return" href="/"><ArrowLeft aria-hidden="true" /> Return to all stories <ArrowUpRight aria-hidden="true" /></Link>
     </article>
   </main>
