@@ -1,8 +1,3 @@
-The August post is a long-form market report (8–10 minute read), not the short 350-character format I used. The PDF shows its headline, excerpt, and layout, but not the full text, so this draft follows that pattern and uses only the September numbers from your MLS graphic.
-
-Paste this into a new file at `posts/september-2026-housing-market-update.md` in your GitHub repo:
-
-```markdown
 ---
 title: "September 2026 Las Vegas Housing Market Update: Charts, Trends & What It Means For You"
 excerpt: "Single-family prices held steady in September while inventory rose, giving buyers more options."
@@ -47,11 +42,3 @@ Single-family prices held steady in September while more homes came on the marke
 ## Source
 
 Data from the Las Vegas REALTORS® Monthly Housing Market Update, September 2026. Growth rates are compared to the prior year.
-```
-
-Two things to decide:
-
-1. **Replace or keep the short post?** The shorter "Las Vegas Market Update: September 2026" post is already live. You can delete it on GitHub, or keep both.
-2. **Author line.** The August article lists The Spaulding Team as the author. If your site doesn't use an author field, the line is harmless, but you can delete it.
-
-If you'd like it shorter or with a different tone, tell me and I'll adjust it.
