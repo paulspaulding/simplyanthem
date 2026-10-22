@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { ArrowLeft, ArrowUpRight } from 'lucide-react'
+import { getPostBySlug, getPosts, type Post } from '../../../lib/posts'
 
 const articles: Record<string, { category: string; title: string; excerpt: string; author: string; date: string; read: string; image: string; body: string[] }> = {
   'august-2026-housing-market-update': {
@@ -34,12 +35,16 @@ const fallback = { category: 'Simply Anthem', title: 'An editorial from Simply A
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
+  const post = getPostBySlug(slug)
+  if (post) return { title: post.title, description: post.excerpt, alternates: { canonical: `/stories/${slug}` }, openGraph: { type: 'article', title: post.title, description: post.excerpt, url: `/stories/${slug}` } }
   const article = articles[slug] ?? fallback
   return { title: article.title, description: article.excerpt, keywords: ['Las Vegas housing market', 'August 2026 housing market update', 'Southern Nevada real estate', 'Las Vegas Realtors', 'Las Vegas home prices', 'Las Vegas housing inventory'], alternates: { canonical: `/stories/${slug}` }, openGraph: { type: 'article', title: article.title, description: article.excerpt, url: `/stories/${slug}`, images: [{ url: article.image }] } }
 }
 
 export default async function StoryPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
+  const post = getPostBySlug(slug)
+  if (post) return <PostView post={post} />
   const article = articles[slug] ?? fallback
 
   const articleSchema = { '@context': 'https://schema.org', '@type': 'NewsArticle', headline: article.title, description: article.excerpt, image: [article.image], author: { '@type': 'Organization', name: article.author }, publisher: { '@type': 'Organization', name: 'Simply Anthem', url: 'https://simplyanthem.com' }, datePublished: article.date, dateModified: article.date, articleSection: article.category, keywords: 'Las Vegas housing market, Southern Nevada real estate, August 2026 housing report, Las Vegas home prices, housing inventory', inLanguage: 'en-US', mainEntityOfPage: { '@type': 'WebPage', '@id': `https://simplyanthem.com/stories/${slug}` } }
@@ -57,4 +62,18 @@ export default async function StoryPage({ params }: { params: Promise<{ slug: st
   </main>
 }
 
-export function generateStaticParams() { return Object.keys(articles).map((slug) => ({ slug })) }
+export function generateStaticParams() { const slugs = Array.from(new Set([...Object.keys(articles), ...getPosts().map((post) => post.slug)])); return slugs.map((slug) => ({ slug })) }
+
+function PostView({ post }: { post: Post }) {
+  return <main className="story-page min-h-screen bg-background text-foreground">
+    <header className="story-header mx-auto flex max-w-7xl items-center justify-between px-5 py-5 lg:px-10"><Link className="wordmark" href="/">simply<span>anthem</span></Link><Link className="back-link" href="/"><ArrowLeft aria-hidden="true" /> Back to journal</Link></header>
+    <article className="article-detail mx-auto max-w-7xl px-5 pb-24 lg:px-10">
+      <div className="article-kicker"><span>{post.category}</span><span>{post.date}</span></div>
+      <h1>{post.title}</h1><p className="article-dek">{post.excerpt}</p>
+      <div className="article-byline"><span>By {post.author}</span><span>{post.read}</span></div>
+      <img className="article-hero" src={post.image} alt={`${post.title} — Simply Anthem`} />
+      <div className="article-body">{post.body.map((block, index) => block.type === 'h2' ? <h2 key={index}>{block.text}</h2> : block.type === 'ul' ? <ul key={index}>{block.items.map((item) => <li key={item}>{item}</li>)}</ul> : <p key={index}>{block.text}</p>)}</div>
+      <Link className="article-return" href="/"><ArrowLeft aria-hidden="true" /> Return to all stories <ArrowUpRight aria-hidden="true" /></Link>
+    </article>
+  </main>
+}

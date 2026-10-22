@@ -3,6 +3,7 @@ title: "September 2026 Las Vegas Housing Market Update: Charts, Trends & What It
 excerpt: "Single-family prices held steady in September while inventory rose, giving buyers more options."
 date: "2026-10-22"
 author: "The Spaulding Team"
+category: "Real estate"
 ---
 
 # September 2026 Las Vegas Housing Market Update

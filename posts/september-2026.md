@@ -2,6 +2,7 @@
 title: "Anthem Living in September"
 excerpt: "Fall is a great time to explore Anthem"
 date: "2026-09-30"
+category: "Southern Nevada"
 ---
 
 # Anthem Living in September

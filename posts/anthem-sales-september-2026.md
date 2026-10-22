@@ -3,6 +3,7 @@ title: "Anthem Home Sales in September 2026"
 excerpt: "Anthem recorded 49 closed sales in September, with a median sale price of $620,000."
 date: "2026-10-22"
 author: "The Spaulding Team"
+category: "Real estate"
 ---
 
 # Anthem Home Sales in September 2026
