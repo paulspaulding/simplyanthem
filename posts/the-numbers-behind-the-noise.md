@@ -11,6 +11,16 @@ image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Oct%2026%20updat
 
 The latest Las Vegas REALTORS® MLS update gives Southern Nevada buyers, sellers, and investors a clearer view beneath the headlines: prices are holding while inventory continues to rise.
 
+## The Southern Nevada Context
+
+Housing is only one part of the market story. Southern Nevada continues to attract visitors, investment, and major infrastructure commitments that shape long-term demand across Clark County and the Las Vegas MSA.
+
+- **40.8 million annual Clark County visitors** support hospitality, retail, entertainment, and service-sector employment.
+- **Projected data center capacity is up 953% by 2030**, adding a major technology and infrastructure growth signal to the regional outlook.
+- **Las Vegas ranks No. 1 among MSAs for business expansion**, reinforcing the region's position as a destination for employers and capital.
+
+These indicators do not replace neighborhood-level housing analysis, but they help explain why prices can remain resilient while inventory expands. A growing economic base and continued visitor activity create demand; higher listings and months of supply give buyers more leverage within that demand.
+
 ## Single-Family Homes
 
 - 1,745 units sold, down 7.4% from the prior year
